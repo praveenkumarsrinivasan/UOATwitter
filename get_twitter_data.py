@@ -32,6 +32,7 @@ def authenticate():
 Get User Details
 '''
 def get_user_details(user):
+##TODO - number of tweets and followers count, following count, number of lists
 
     user_dict = {}
 
@@ -244,6 +245,33 @@ def search_tweets_by_location(api, query, latlong_str):
 
 
 '''
+Gets the tweets which matches the given search query fora given user
+'''
+def search_user_tweets(api, twitter_handle, query):
+    results = []
+
+    #tweets = api.search(
+            #q = query,
+            #lang = "en",
+            #count = min_count,
+            #show_user = "true"
+        #)
+    #for tweet in tweets:
+        #results.append(get_tweet_details(tweet))
+
+    tweets = tweepy.Cursor(
+            api.search,
+            id = twitter_handle,
+            q = query,
+            lang = "en",
+        ).items(min_count)
+    for tweet in tweets:
+        results.append(get_tweet_details(tweet))
+
+    return results
+
+
+'''
 Gets the latest tweets from a given country
 '''
 def latest_tweets_by_location(api, location, location_type):
@@ -321,7 +349,6 @@ def get_following_details(api, twitter_handle):
 Get the people of interest(following) for the list of people of interest for a person
 '''
 def get_extended_following_details(api, twitter_handle, following):
-    flag = 0
     results = []
     results.extend(following)
     for f in following:
@@ -333,14 +360,13 @@ def get_extended_following_details(api, twitter_handle, following):
                 ).items(5000)
             for user in users:
                 print user.screen_name
-                results.append(user)
+                results.append(get_user_details(user))
             # print 'sleeping for 60'
             # time.sleep(60)
-        except tweepy.error.RateLimitError:
-            flag = flag + 1
-            print 'Pausing for rate limit ...'
-            dump_following(twitter_handle + '_' + flag, results)
-            print 'sleeping for 60*5'
+        except tweepy.error.RateLimitError as e:
+            print("rate limit  error : " + str(e))
+            # dump_following(twitter_handle + '_' + flag, results)
+            # print 'sleeping for 60*5'
             # time.sleep((60 * 5))
             # time.sleep((60 * 15) + 5)
         except tweepy.TweepError as e:
@@ -482,14 +508,19 @@ def main():
     ##get social circle of a person
     twitter_handle = 'anjaligupta2910'
     following = get_following_details(api, twitter_handle)
-    dump_following(twitter_handle, following)
+    # dump_following(twitter_handle, following)
     ##get followers
     # followers = get_followers_details(api, twitter_handle)
 
     ##get the extended social circle of a person
     extended_following = get_extended_following_details(api, twitter_handle, following)
-    dump_following(twitter_handle, extended_following)
+    # dump_following(twitter_handle, extended_following)
 
+    ##Search tweets of a given user
+    twitter_handle = ''
+    search_term = 'movies'
+    #result = search_user_tweets(api, twitter_handle, search_term)
+    #dump_tweets(result, twitter_handle)
 
 if __name__ == '__main__':
     main()

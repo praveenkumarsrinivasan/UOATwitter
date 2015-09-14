@@ -13,6 +13,8 @@ Done
 
 Pending
 - Get tweets from the users social circle, extended social circle
+    + Get tweets for a given user
+    + Search tweets of a given user
 - Get influential tweets by topic or keyword
     + in twitter on the whole
     + in social circle or extended social circle
