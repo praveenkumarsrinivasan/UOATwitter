@@ -22,7 +22,9 @@ returns the Twitter api object
 def authenticate():
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth)
+    # api = tweepy.API(auth)
+    api = tweepy.API(auth, wait_on_rate_limit=True,
+                               wait_on_rate_limit_notify=True)
 
     return api
 
@@ -323,7 +325,6 @@ def get_extended_following_details(api, twitter_handle, following):
     results = []
     results.extend(following)
     for f in following:
-        print f
         try:
             print 'Getting the details for ' + f['screenname']
             users = tweepy.Cursor(
@@ -333,15 +334,18 @@ def get_extended_following_details(api, twitter_handle, following):
             for user in users:
                 print user.screen_name
                 results.append(user)
-            time.sleep(60)
+            # print 'sleeping for 60'
+            # time.sleep(60)
         except tweepy.error.RateLimitError:
             flag = flag + 1
             print 'Pausing for rate limit ...'
-            results = list(set(results))
             dump_following(twitter_handle + '_' + flag, results)
-            time.sleep((60 * 5))
+            print 'sleeping for 60*5'
+            # time.sleep((60 * 5))
             # time.sleep((60 * 15) + 5)
-    results = list(set(results))
+        except tweepy.TweepError as e:
+            # Just exit if any error
+            print("some error : " + str(e))
     return results
 
 
