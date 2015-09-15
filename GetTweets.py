@@ -1,3 +1,6 @@
+from TwitterApp import *
+from ExtractDetails import *
+
 '''
 Gets tweets till the given tweet id
 '''
@@ -95,7 +98,7 @@ def latest_tweets_by_location(api, location, location_type):
             granularity = location_type)
     place_id = places[0].id
 
-    print places
+    # print places
 
     tweets = tweepy.Cursor(
             api.search,

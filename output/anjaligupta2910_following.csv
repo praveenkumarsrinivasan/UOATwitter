@@ -1,13 +1,13 @@
-username,user_id,friends_count,created_at,time_zone,followers_count,location,following,favourites_count,geo_enabled,screenname,listed_count
-Pramod kumar,610195378,87,2012-06-16 18:40,,5,,False,53,True,Pramodk55187291,0
-Spectranet,244413282,96,2011-01-29 07:26,New Delhi,346,,False,20,True,spectranet_in,5
-Anil Garg,2545938445,39,2014-06-04 11:54,Chennai,9,Delhi India,False,1,False,anilgarg1938,0
-Praveen K Srinivasan,187548221,101,2010-09-06 14:55,Chennai,47,Bangalore ,False,32,True,praveen_sxi,2
-Neha Garg,83591820,71,2009-10-19 12:50,London,219,London,False,16,False,gargbneha,13
-Boman Irani,113278275,108,2010-02-11 07:44,Mumbai,2875495,mumbai,False,876,True,bomanirani,5045
-Anupam Kher,76294950,93,2009-09-22 09:53,New Delhi,5191742,"ÜT: 19.110118,72.833712",False,65,True,AnupamPkher,8469
-NDTV,37034483,33,2009-05-01 20:34,New Delhi,4902056,India,False,0,False,ndtv,9814
-Oxford University,48289662,445,2009-06-18 08:28,London,241047,"Oxford, UK",False,393,False,UniofOxford,3263
-Amitabh Bachchan,145125358,984,2010-05-18 05:16,Mumbai,16849957,"Mumbai, India",False,45,False,SrBachchan,29956
-Hrithik Roshan,113419517,103,2010-02-11 18:06,Mumbai,10955101,"ÜT: 19.109458,72.825842",False,52,False,iHrithik,16813
-Aamir Khan,88856792,6,2009-11-10 05:08,Mumbai,14533055,Mumbai,False,15,True,aamir_khan,19936
+username,user_id,statuses_count,friends_count,created_at,time_zone,followers_count,location,following,favourites_count,geo_enabled,screenname,listed_count
+Pramod kumar,610195378,4,87,2012-06-16 18:40,,5,,False,53,True,Pramodk55187291,0
+Spectranet,244413282,3314,96,2011-01-29 07:26,New Delhi,351,,False,20,True,spectranet_in,7
+Anil Garg,2545938445,1,39,2014-06-04 11:54,Chennai,9,Delhi India,False,1,False,anilgarg1938,0
+Praveen K Srinivasan,187548221,38,101,2010-09-06 14:55,Chennai,47,Bangalore ,False,32,True,praveen_sxi,2
+Neha Garg,83591820,932,71,2009-10-19 12:50,London,219,London,False,16,False,gargbneha,13
+Boman Irani,113278275,5960,108,2010-02-11 07:44,Mumbai,2878989,mumbai,False,876,True,bomanirani,5043
+Anupam Kher,76294950,21784,93,2009-09-22 09:53,New Delhi,5199908,"ÜT: 19.110118,72.833712",False,65,True,AnupamPkher,8472
+NDTV,37034483,209493,32,2009-05-01 20:34,New Delhi,4911641,India,False,0,False,ndtv,9821
+Oxford University,48289662,3690,445,2009-06-18 08:28,London,241427,"Oxford, UK",False,393,False,UniofOxford,3268
+Amitabh Bachchan,145125358,44580,983,2010-05-18 05:16,Mumbai,16875442,"Mumbai, India",False,45,False,SrBachchan,29965
+Hrithik Roshan,113419517,2215,103,2010-02-11 18:06,Mumbai,10975007,"ÜT: 19.109458,72.825842",False,52,False,iHrithik,16814
+Aamir Khan,88856792,309,6,2009-11-10 05:08,Mumbai,14554787,Mumbai,False,15,True,aamir_khan,19937

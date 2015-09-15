@@ -1,3 +1,6 @@
+import tweepy
+from TwitterApp import *
+
 '''
 Gets the tweets which matches the given search query
 '''

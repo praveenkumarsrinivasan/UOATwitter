@@ -1,3 +1,5 @@
+import csv
+
 '''
 Dump the tweets into a csv file
 '''
