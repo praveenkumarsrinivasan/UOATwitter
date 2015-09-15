@@ -28,11 +28,12 @@ def authenticate():
 
     return api
 
+
 '''
 Get User Details
 '''
 def get_user_details(user):
-##TODO - number of tweets and followers count, following count, number of lists
+    ##TODO - number of tweets and followers count, following count, number of lists
 
     user_dict = {}
 
