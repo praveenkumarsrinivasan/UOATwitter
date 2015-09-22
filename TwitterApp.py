@@ -11,13 +11,18 @@ access_token_secret = 'kF0PLt5jGrbSLQFYl7z0SWu0aRMIzT5LmWqit4KzbCAvP'
 #the number of tweets to fetch in each api request
 min_count = 200
 
+def get_auth():
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    return auth
+
+
 '''
 authenticate the Twitter API
 returns the Twitter api object
 '''
 def authenticate():
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = get_auth()
     # api = tweepy.API(auth)
     api = tweepy.API(auth, wait_on_rate_limit=True,
                                wait_on_rate_limit_notify=True)

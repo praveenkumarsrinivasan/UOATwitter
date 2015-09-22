@@ -12,6 +12,9 @@ Done
 
 
 Pending
+- Streaming api
+    + People
+    + keywords
 - Get tweets from the users social circle, extended social circle
     + Get tweets for a given user
     + Search tweets of a given user
