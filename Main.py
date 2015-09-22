@@ -17,7 +17,7 @@ def main():
     twitter_handle = 'mkbhd'
     twitter_handle = 'tldtoday'
     twitter_handle = 'anjaligupta2910'
-    latest_tweets = get_latest_tweets(api, twitter_handle)
+    # latest_tweets = get_latest_tweets(api, twitter_handle)
     # dump_tweets(latest_tweets, twitter_handle)
 
 
@@ -92,6 +92,7 @@ def main():
     ##get the extended social circle of a person
     # extended_following = get_extended_following_details(api, twitter_handle, following)
     # dump_following(twitter_handle, extended_following)
+
 
     ##Search tweets of a given user
     twitter_handle = ''

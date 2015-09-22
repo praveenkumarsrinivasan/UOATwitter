@@ -9,6 +9,8 @@ Done
 - Get tweet details
 - Get tweets which has the given hashtag
 - Get the users social circle, extended social circle
+- Get tweets from the users social circle, extended social circle
+    + Get tweets for a given user
 
 
 Pending
@@ -16,7 +18,6 @@ Pending
     + People
     + keywords
 - Get tweets from the users social circle, extended social circle
-    + Get tweets for a given user
     + Search tweets of a given user
 - Get influential tweets by topic or keyword
     + in twitter on the whole
