@@ -1,4 +1,43 @@
 import csv
+import json
+from pymongo import MongoClient
+
+
+'''
+Dump the tweets into the given collection
+'''
+def dump_tweets_db(tweets, collection_name='twitter_keyword_collection'):
+    client = MongoClient('localhost', 27017)
+    db = client['twitter_db']
+    collection = db[collection_name]
+
+    tweets = json.loads(tweets)
+    res = collection.insert(tweets)
+
+    return res
+
+
+'''
+Dump the user details into the given collection
+'''
+def dump_following_data_db(tweets, collection_name='twitter_user_collection'):
+    client = MongoClient('localhost', 27017)
+    db = client['twitter_db']
+    collection = db[collection_name]
+
+    tweets = json.loads(tweets)
+    res = collection.insert(tweets)
+    
+    return res
+
+
+'''
+Dump the user details into the given collection
+'''
+def dump_following_data_db(tweets, collection_name='twitter_user_collection'):
+    res = dump_following_data_db(tweets, collection_name='twitter_user_collection')
+    return res
+
 
 '''
 Dump the tweets into a csv file
@@ -29,3 +68,4 @@ def dump_following(twitter_handle, following):
             for k in header:
                 row.append(item[k])
             writer.writerow(row)
+

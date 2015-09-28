@@ -1,6 +1,7 @@
 import time
 import json
 from TwitterApp import *
+from SocialCircle import *
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
@@ -15,27 +16,27 @@ There are different kinds of streams: public stream, user stream, multi-user(sit
 #sets up a connection and runs for the given time
 #http://stats.seandolinar.com/collecting-twitter-data-using-a-python-stream-listener/
 class LimitListener(StreamListener):
-    def __init__(self, start_time, time_limit=60.0):
+    def __init__(self, start_time, time_limit=60.0, collection_name):
         self.time = start_time
         self.limit = time_limit
+        self.collection_name = collection_name
 
     def on_data(self, data):
         client = MongoClient('localhost', 27017)
         db = client['twitter_db']
-        collection = db['twitter_collection']
+        collection = db[self.collection_name]
 
         while (time.time() - self.time) < self.limit:
             try:
                 'Save to File'
-                # saveFile = open('raw_tweets.json', 'a')
-                # saveFile.write(data)
-                # saveFile.write('\n')
-                # saveFile.close()
+                saveFile = open('raw_tweets.json', 'a')
+                saveFile.write(data)
+                saveFile.close()
                 
                 'Insert Into DB'
-                data = json.dumps(data, ensure_ascii=False)
-                data = json.loads(data)
-                collection.insert(data)
+                # data = json.dumps(data, ensure_ascii=False)
+                collection.insert(json.loads(data))
+                return True
 
             except BaseException, e:
                 print 'failed ondata,', str(e)
@@ -54,12 +55,22 @@ class LimitListener(StreamListener):
 #https://github.com/tweepy/tweepy/blob/master/examples/streaming.py
 #https://github.com/tweepy/examples/blob/master/streamwatcher.py
 class StdOutListener(tweepy.StreamListener):
+    def __init__(self, collection_name):
+        self.collection_name = collection_name
+
     def on_data(self, data):
+        client = MongoClient('localhost', 27017)
+        db = client['twitter_db']
+        collection = db[self.collection_name]
+
         try:
             saveFile = open('raw_tweets.json', 'a')
             saveFile.write(data)
-            saveFile.write('\n')
             saveFile.close()
+
+            'Insert Into DB'
+            # data = json.dumps(data, ensure_ascii=False)
+            collection.insert(json.loads(data))
 
             return True
         except BaseException, e:
@@ -76,23 +87,29 @@ class StdOutListener(tweepy.StreamListener):
 
 if __name__ == '__main__':
     auth = get_auth()
+    api = authenticate()
 
-    track_user_list = ['anjaligupta2910']
-    track_user_list = ['575930104']
+    track_user_list = ['anjaligupta2910', 'MKBHD']
+    track_user_id_list = ['575930104']
+    track_user_id_list = []
+    for user in track_user_list:
+        track_user_id_list.append(str(get_user_id(api, user)))
+    print track_user_id_list
 
     track_keyword_list = ['programming']
 
-    # std_listener = StdOutListener()
+    # std_listener = StdOutListener('twitter_keyword_collection')
     # std_stream = tweepy.Stream(auth, std_listener)
     # std_stream.filter(track=track_keyword_list, async=True)
     # std_stream.filter(track=track_keyword_list)
 
-    limit_listener = LimitListener(time.time(), time_limit=60.0)
-    limit_stream = Stream(auth, limit_listener) #initialize Stream object with a time out limit
-    limit_stream.filter(track=track_keyword_list, languages=['en'])  #call the filter method to run the Stream Object
+    # limit_listener = LimitListener(time.time(), time_limit=60.0, 'twitter_keyword_collection')
+    # limit_stream = Stream(auth, limit_listener) #initialize Stream object with a time out limit
+    # limit_stream.filter(track=track_keyword_list, languages=['en'])  #call the filter method to run the Stream Object
 
-    # std_listener1 = StdOutListener()
-    # std_stream1 = tweepy.Stream(auth, std_listener1)
+    # std_listener1 = StdOutListener('twitter_keyword_collection')
+    std_listener1 = StdOutListener('twitter_user_collection')
+    std_stream1 = tweepy.Stream(auth, std_listener1)
     # std_stream1.filter(track=track_keyword_list)
-    # std_stream1.filter(follow=track_user_list)
+    std_stream1.filter(follow=track_user_id_list)
 

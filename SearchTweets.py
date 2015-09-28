@@ -1,6 +1,20 @@
 import tweepy
 from TwitterApp import *
 
+
+'''
+Gets the tweets which matches the given search query
+'''
+def search_tweets_db(api, query):
+    tweets = tweepy.Cursor(
+            api.search,
+            q = query,
+            lang = "en",
+        ).items(min_count)
+
+    return tweets
+
+
 '''
 Gets the tweets which matches the given search query
 '''
@@ -28,7 +42,20 @@ def search_tweets(api, query):
 
 
 '''
-Gets the tweets which matches the given search query from a import given location
+Gets the tweets which matches the given search query from a given location
+'''
+def search_tweets_by_location_db(api, query, latlong_str):
+    tweets = tweepy.Cursor(
+            api.search,
+            q = query,
+            geocode = latlong_str,
+            lang = "en",
+        ).items(min_count)
+    return tweets
+
+
+'''
+Gets the tweets which matches the given search query from a given location
 '''
 def search_tweets_by_location(api, query, latlong_str):
     results = []
@@ -43,6 +70,20 @@ def search_tweets_by_location(api, query, latlong_str):
         results.append(get_tweet_details(tweet))
 
     return results
+
+
+'''
+Gets the tweets which matches the given search query for a given user
+'''
+def search_user_tweets_db(api, twitter_handle, query):
+    tweets = tweepy.Cursor(
+            api.search,
+            id = twitter_handle,
+            q = query,
+            lang = "en",
+        ).items(min_count)
+
+    return tweets
 
 
 '''

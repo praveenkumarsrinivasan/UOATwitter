@@ -4,7 +4,7 @@ import json
 def insert_data(tweets):
     client = MongoClient('localhost', 27017)
     db = client['twitter_db']
-    collection = db['twitter_collection1']
+    collection = db['twitter_collection']
 
     tweets = json.loads(tweets)
     res = collection.insert(tweets)
@@ -12,8 +12,4 @@ def insert_data(tweets):
     return res
 
 if __name__ == '__main__':
-    tweets = {}
-    tweets["name"] = "one"
-    tweets["time"] = "12pm"
-    tweets = json.dumps(tweets, ensure_ascii=False)
     insert_data(tweets)

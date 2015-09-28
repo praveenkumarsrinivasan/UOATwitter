@@ -23,9 +23,11 @@ returns the Twitter api object
 '''
 def authenticate():
     auth = get_auth()
-    # api = tweepy.API(auth)
-    api = tweepy.API(auth, wait_on_rate_limit=True,
-                               wait_on_rate_limit_notify=True)
+    api = tweepy.API(
+                auth,
+                wait_on_rate_limit=True,
+                wait_on_rate_limit_notify=True
+            )
 
     return api
 
