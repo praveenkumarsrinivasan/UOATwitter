@@ -6,13 +6,14 @@ from pymongo import MongoClient
 '''
 Dump the tweets into the given collection
 '''
-def dump_tweets_db(tweets, collection_name='twitter_keyword_collection'):
+def dump_tweets_db(tweets, twitter_handle, collection_name='twitter_keyword_collection'):
     client = MongoClient('localhost', 27017)
     db = client['twitter_db']
     collection = db[collection_name]
 
-    tweets = json.loads(tweets)
-    res = collection.insert(tweets)
+    res = None
+    if tweets:
+        res = collection.insert(json.loads(json.dumps(tweets)))
 
     return res
 
@@ -20,22 +21,15 @@ def dump_tweets_db(tweets, collection_name='twitter_keyword_collection'):
 '''
 Dump the user details into the given collection
 '''
-def dump_following_data_db(tweets, collection_name='twitter_user_collection'):
+def dump_user_db(twitter_handle, following, collection_name='twitter_user_collection'):
     client = MongoClient('localhost', 27017)
     db = client['twitter_db']
     collection = db[collection_name]
 
-    tweets = json.loads(tweets)
-    res = collection.insert(tweets)
-    
-    return res
+    res = None
+    if following:
+        res = collection.insert(json.loads(json.dumps(following)))
 
-
-'''
-Dump the user details into the given collection
-'''
-def dump_following_data_db(tweets, collection_name='twitter_user_collection'):
-    res = dump_following_data_db(tweets, collection_name='twitter_user_collection')
     return res
 
 
@@ -58,7 +52,7 @@ def dump_tweets(tweets, twitter_handle):
 '''
 Dump the following details of a person into a csv file
 '''
-def dump_following(twitter_handle, following):
+def dump_user(twitter_handle, following):
     with open('output/%s_following.csv' % twitter_handle, 'wb') as f:
         writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         header = following[0].keys()

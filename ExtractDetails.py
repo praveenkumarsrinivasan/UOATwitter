@@ -1,4 +1,5 @@
 import re 
+import json
 
 '''
 Get User Details
@@ -53,6 +54,23 @@ def get_user_details(user):
     return user_dict
 
 
+def get_place_details(place):
+    place_dict = {}
+
+    place_dict['country_code'] = place.country_code
+    place_dict['country'] = place.country
+    place_dict['place_type'] = place.place_type
+    place_dict['bounding_box_type'] = place.bounding_box.type
+    place_dict['bounding_box_coordinates'] = place.bounding_box.coordinates
+    place_dict['contained_within'] = place.contained_within
+    place_dict['full_name'] = place.full_name
+    place_dict['id'] = place.id
+    place_dict['name'] = place.name
+    place_dict['attributes'] = place.attributes
+
+    return place_dict
+
+
 '''
 returns a dict of necessary attributes for a given tweet
 '''
@@ -78,7 +96,10 @@ def get_tweet_details(tweet):
 
     tweets_dict['created_at'] = tweet.created_at.strftime('%Y-%m-%d %H:%M')
 
-    tweets_dict['place'] = tweet.place
+    if tweet.place != None:
+        tweets_dict['place'] = get_place_details(tweet.place)
+    else:
+        tweets_dict['place'] = tweet.place
     tweets_dict["coordinates"] = tweet.coordinates
     tweets_dict["geo"] = tweet.geo
 

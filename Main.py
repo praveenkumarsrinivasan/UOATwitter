@@ -13,66 +13,62 @@ def main():
     ## authenticate the api
     api = authenticate()
 
+
     ## Get the latest tweets from MKBHD
     twitter_handle = 'mkbhd'
     twitter_handle = 'tldtoday'
     twitter_handle = 'anjaligupta2910'
     # latest_tweets = get_latest_tweets(api, twitter_handle)
-    # dump_tweets(latest_tweets, twitter_handle)
-    # latest_tweets = get_latest_tweets_db(api, twitter_handle)
     # dump_tweets_db(latest_tweets, twitter_handle)
+    # dump_tweets(latest_tweets, twitter_handle)
 
 
     ## Get the last 600 tweets from Jonathan Morison
-    #last_n_tweets = get_last_n_tweets(api, twitter_handle, 600)
+    # last_n_tweets = get_last_n_tweets(api, twitter_handle, 600)
+    # dump_tweets_db(last_n_tweets, twitter_handle)
     #dump_tweets(last_n_tweets, twitter_handle)
-    #last_n_tweets = get_last_n_tweets_db(api, twitter_handle, 600)
-    #dump_tweets_db(last_n_tweets, twitter_handle)
 
 
     ## ID
     ## Get the tweet with id
     tweet_id = "621338929208266752"
-    # dump_tweets(get_tweet_by_id(api, tweet_id), tweet_id)
-    # dump_tweets_db(get_tweet_by_id_db(api, tweet_id), tweet_id)
+    # tweet = get_tweet_by_id(api, tweet_id)
+    # dump_tweets_db(tweet, tweet_id)
+    # dump_tweets(tweet, tweet_id)
 
 
-    # Search terms
-    ## Get the tweets that contain the search term 'movies'
-    search_term = "movies"
-    search_term = "movies or movie"
-    # dump_tweets(search_tweets(api, search_term), search_term)
-    # dump_tweets_db(search_tweets_db(api, search_term), search_term)
-    ## Get the tweets that contain the following search terms ['movies', 'restaurants']
-
-
-    ## Location - poi, neighborhood, city, admin or country
+    ### Location - poi, neighborhood, city, admin or country
     ## Get the latest tweets from New Zealand
     location = "New Zealand"
     location_type = "country"
-    # dump_tweets(latest_tweets_by_location(api, location, location_type), location)
-    # dump_tweets_db(latest_tweets_by_location_db(api, location, location_type), location)
+    # tweets = latest_tweets_by_location(api, location, location_type)
+    # dump_tweets_db(tweets, location)
+    # dump_tweets(tweets, location)
+
 
     ## Get the latest tweets from Auckland
     location = "Auckland"
     location_type = "city"
-    # dump_tweets(latest_tweets_by_location(api, location, location_type), location)
-    # dump_tweets_db(latest_tweets_by_location_db(api, location, location_type), location)
+    # tweets = latest_tweets_by_location(api, location, location_type)
+    # dump_tweets_db(tweets, location)
+    # dump_tweets(tweets, location)
 
     ## Get the tweets from the given lat-long
     location = "Queen Street, Auckland, New Zealand" ##queen street - lat log
     location_type = "neighborhood"
-    # dump_tweets(latest_tweets_by_location(api, location, location_type), location)
-    # dump_tweets_db(latest_tweets_by_location_db(api, location, location_type), location)
+    # tweets = latest_tweets_by_location(api, location, location_type)
+    # dump_tweets_db(tweets, location)
+    # dump_tweets(tweets, location)
 
     ##Get the tweets from the given lat-long region
     location = "12.9881347,77.73179549999998,8km" ##queen street - lat log
     location_type = "ITPL Main Road LatLong"
-    # dump_tweets(latest_tweets_by_latlong(api, location), location_type)
-    # dump_tweets_db(latest_tweets_by_latlong_db(api, location), location_type)
+    # tweets = latest_tweets_by_latlong(api, location)
+    # dump_tweets_db(tweets, location_type)
+    # dump_tweets(tweets, location_type)
 
 
-    ## Trending Topics
+    ### Trending Topics
     ## Get the daily trending topics
     lat_str = "12.9881347"
     long_str = "77.73179549999998"
@@ -85,38 +81,50 @@ def main():
     ## TODO: dump trends
 
 
+    ### Search terms
+    ## Get the tweets that contain the search term 'movies'
+    search_term = "movies"
+    search_term = "movies or movie"
+    # tweets = search_tweets(api, search_term)
+    # dump_tweets_db(tweets, search_term)
+    # dump_tweets(tweets, search_term)
+    ## Get the tweets that contain the following search terms ['movies', 'restaurants']
+
+
     ## Search term and Location
     location = "12.9881347,77.73179549999998,8km" ##queen street - lat log
     location_type = "ITPL Main Road LatLong"
-    query = "#movies"
-    # dump_tweets(search_tweets_by_location(api, query, location), location_type)
-    # dump_tweets_db(search_tweets_by_location_db(api, query, location), location_type)
-
-
-    ##get social circle of a person
-    twitter_handle = 'anjaligupta2910'
-    # following = get_following_details(api, twitter_handle)
-    # dump_following(twitter_handle, following)
-    # following = get_following_details_db(api, twitter_handle)
-    # dump_following_db(twitter_handle, following)
-    ##get followers
-    # followers = get_followers_details(api, twitter_handle)
-    # followers = get_followers_details_db(api, twitter_handle)
-
-    ##get the extended social circle of a person
-    # extended_following = get_extended_following_details(api, twitter_handle, following)
-    # dump_following(twitter_handle, extended_following)
-    # extended_following = get_extended_following_details_db(api, twitter_handle, following)
-    # dump_following_db(twitter_handle, extended_following)
+    query = "#itpl"
+    # tweets = search_tweets_by_location(api, query, location)
+    # dump_tweets_db(tweets, location_type)
+    # dump_tweets(tweets, location_type)
 
 
     ##Search tweets of a given user
     twitter_handle = ''
     search_term = 'movies'
+
     #result = search_user_tweets(api, twitter_handle, search_term)
-    #dump_tweets(result, twitter_handle)
-    #result = search_user_tweets_db(api, twitter_handle, search_term)
     #dump_tweets_db(result, twitter_handle)
+    #dump_tweets(result, twitter_handle)
+
+
+    ###Social Circle
+    ##get social circle of a person
+    twitter_handle = 'anjaligupta2910'
+    # following = get_following_details(api, twitter_handle)
+    # dump_user_db(twitter_handle, following)
+    # dump_user(twitter_handle, following)
+    ##get followers
+    # followers = get_followers_details(api, twitter_handle)
+    # dump_user_db(twitter_handle, followers)
+
+
+    ##get the extended social circle of a person
+    # extended_following = get_extended_following_details(api, twitter_handle, following)
+    # dump_user_db(twitter_handle, extended_following)
+    # dump_user(twitter_handle, extended_following)
+
 
 if __name__ == '__main__':
     main()
