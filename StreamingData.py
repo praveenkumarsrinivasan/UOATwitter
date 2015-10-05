@@ -16,7 +16,7 @@ There are different kinds of streams: public stream, user stream, multi-user(sit
 #sets up a connection and runs for the given time
 #http://stats.seandolinar.com/collecting-twitter-data-using-a-python-stream-listener/
 class LimitListener(StreamListener):
-    def __init__(self, start_time, time_limit=60.0, collection_name):
+    def __init__(self, collection_name, start_time, time_limit=60.0):
         self.time = start_time
         self.limit = time_limit
         self.collection_name = collection_name
@@ -89,6 +89,8 @@ if __name__ == '__main__':
     auth = get_auth()
     api = authenticate()
 
+    track_location_latlong = [[-122.75, 36.8, -121.75, 37.8], [-74,40,-73,41]]
+
     track_user_list = ['anjaligupta2910', 'MKBHD']
     track_user_id_list = ['575930104']
     track_user_id_list = []
@@ -103,13 +105,19 @@ if __name__ == '__main__':
     # std_stream.filter(track=track_keyword_list, async=True)
     # std_stream.filter(track=track_keyword_list)
 
-    # limit_listener = LimitListener(time.time(), time_limit=60.0, 'twitter_keyword_collection')
+    # limit_listener = LimitListener('twitter_keyword_collection', time.time(), time_limit=60.0)
     # limit_stream = Stream(auth, limit_listener) #initialize Stream object with a time out limit
     # limit_stream.filter(track=track_keyword_list, languages=['en'])  #call the filter method to run the Stream Object
 
-    # std_listener1 = StdOutListener('twitter_keyword_collection')
-    std_listener1 = StdOutListener('twitter_user_collection')
-    std_stream1 = tweepy.Stream(auth, std_listener1)
-    # std_stream1.filter(track=track_keyword_list)
-    std_stream1.filter(follow=track_user_id_list)
+    # std_listener1 = StdOutListener('twitter_user_collection')
+    # std_stream1 = tweepy.Stream(auth, std_listener1)
+    # std_stream1.filter(follow=track_user_id_list)
+
+    # limit_listener1 = LimitListener('twitter_user_collection', time.time(), time_limit=60.0)
+    # limit_stream1 = Stream(auth, limit_listener1) #initialize Stream object with a time out limit
+    # limit_stream1.filter(follow=track_user_id_list, languages=['en'])  #call the filter method to run the Stream Object
+
+    limit_listener2 = LimitListener('twitter_location_collection', time.time(), time_limit=60.0)
+    limit_stream2 = Stream(auth, limit_listener2) #initialize Stream object with a time out limit
+    limit_stream2.filter(locations=track_location_latlong, languages=['en'])  #call the filter method to run the Stream Object
 
