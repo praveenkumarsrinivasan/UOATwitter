@@ -1,6 +1,6 @@
 import tweepy
-from TwitterApp import *
-from ExtractDetails import *
+from ..utils.TwitterApp import *
+from ..utils.ExtractDetails import *
 
 
 '''

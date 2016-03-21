@@ -1,5 +1,5 @@
-from TwitterApp import *
-from ExtractDetails import *
+from ..utils.TwitterApp import *
+from ..utils.ExtractDetails import *
 
 
 '''
@@ -42,16 +42,9 @@ def get_extended_following_details(api, twitter_handle, following):
             for user in users:
                 print user.screen_name
                 results.append(get_user_details(user))
-            # print 'sleeping for 60'
-            # time.sleep(60)
         except tweepy.error.RateLimitError as e:
             print("rate limit  error : " + str(e))
-            # dump_following(twitter_handle + '_' + flag, results)
-            # print 'sleeping for 60*5'
-            # time.sleep((60 * 5))
-            # time.sleep((60 * 15) + 5)
         except tweepy.TweepError as e:
-            # Just exit if any error
             print("some error : " + str(e))
     return results
 

@@ -1,6 +1,6 @@
 import json
-from TwitterApp import *
-from ExtractDetails import *
+from ..utils.TwitterApp import *
+from ..utils.ExtractDetails import *
 
 '''
 Gets tweets till the given tweet id
@@ -56,6 +56,7 @@ def get_tweet_by_id(api, tweet_id):
 
 '''
 Gets tweet by Latitude and Longitude
+example location = "12.9881347,77.73179549999998,8km" ##queen street - lat log
 '''
 def latest_tweets_by_latlong(api, latlong_str):
     results = []
@@ -89,7 +90,7 @@ def get_trends_by_woeid(api, woeid):
 
 
 '''
-Gets the latest tweets from a given country
+Gets the latest tweets from a given location
 '''
 def latest_tweets_by_location(api, location, location_type):
     #granularity = poi, neighborhood, city, admin or country

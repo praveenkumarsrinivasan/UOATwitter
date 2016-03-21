@@ -62,7 +62,8 @@ def get_place_details(place):
     place_dict['place_type'] = place.place_type
     place_dict['bounding_box_type'] = place.bounding_box.type
     place_dict['bounding_box_coordinates'] = place.bounding_box.coordinates
-    place_dict['contained_within'] = place.contained_within
+    # place_dict['contained_within'] = place.contained_within
+    # place_dict['centroid'] = place.centroid
     place_dict['full_name'] = place.full_name
     place_dict['id'] = place.id
     place_dict['name'] = place.name

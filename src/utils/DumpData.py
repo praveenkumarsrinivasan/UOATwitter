@@ -2,6 +2,11 @@ import csv
 import json
 from pymongo import MongoClient
 
+'''
+----------------------------------
+DB
+----------------------------------
+'''
 
 '''
 Dump the tweets into the given collection
@@ -21,17 +26,38 @@ def dump_tweets_db(tweets, twitter_handle, collection_name='twitter_keyword_coll
 '''
 Dump the user details into the given collection
 '''
-def dump_user_db(twitter_handle, following, collection_name='twitter_user_collection'):
+def dump_user_db(twitter_handle, users, collection_name='twitter_user_collection'):
     client = MongoClient('localhost', 27017)
     db = client['twitter_db']
     collection = db[collection_name]
 
     res = None
-    if following:
-        res = collection.insert(json.loads(json.dumps(following)))
+    if users:
+        res = collection.insert(json.loads(json.dumps(users)))
 
     return res
 
+
+'''
+Dump the user details into the given collection
+'''
+def dump_location_db(place_details, collection_name='twitter_location_collection'):
+    client = MongoClient('localhost', 27017)
+    db = client['twitter_db']
+    collection = db[collection_name]
+
+    res = None
+    if place_details:
+        res = collection.insert(json.loads(json.dumps(place_details)))
+
+    return res
+
+
+'''
+----------------------------------
+CSV
+----------------------------------
+'''
 
 '''
 Dump the tweets into a csv file

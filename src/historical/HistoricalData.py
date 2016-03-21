@@ -1,6 +1,6 @@
-from TwitterApp import *
-from DumpData import *
-from ExtractDetails import *
+from ..utils.TwitterApp import *
+from ..utils.DumpData import *
+from ..utils.ExtractDetails import *
 from GetTweets import *
 from SearchTweets import *
 from SocialCircle import *
@@ -62,7 +62,7 @@ def main():
 
     ##Get the tweets from the given lat-long region
     location = "12.9881347,77.73179549999998,8km" ##queen street - lat log
-    location_type = "ITPL Main Road LatLong"
+    location_type = "LatLong"
     # tweets = latest_tweets_by_latlong(api, location)
     # dump_tweets_db(tweets, location_type)
     # dump_tweets(tweets, location_type)
@@ -85,25 +85,26 @@ def main():
     ## Get the tweets that contain the search term 'movies'
     search_term = "movies"
     search_term = "movies or movie"
-    # tweets = search_tweets(api, search_term)
-    # dump_tweets_db(tweets, search_term)
+    print 'Searching Tweet for ', search_term
+    tweets = search_tweets(api, search_term)
+    dump_tweets_db(tweets, search_term)
     # dump_tweets(tweets, search_term)
     ## Get the tweets that contain the following search terms ['movies', 'restaurants']
 
 
     ## Search term and Location
     location = "12.9881347,77.73179549999998,8km" ##queen street - lat log
-    location_type = "ITPL Main Road LatLong"
+    location_type = "LatLong"
     query = "#itpl"
+    print 'Searching tweets by location and query', location,
     # tweets = search_tweets_by_location(api, query, location)
     # dump_tweets_db(tweets, location_type)
     # dump_tweets(tweets, location_type)
 
 
     ##Search tweets of a given user
-    twitter_handle = ''
+    twitter_handle = 'mkbhd'
     search_term = 'movies'
-
     #result = search_user_tweets(api, twitter_handle, search_term)
     #dump_tweets_db(result, twitter_handle)
     #dump_tweets(result, twitter_handle)

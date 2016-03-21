@@ -1,0 +1,6 @@
+movies
+movie
+restaurant
+hotel
+theater
+theatre
